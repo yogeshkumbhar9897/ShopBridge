@@ -1,0 +1,21 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "57b74535-5219-43f8-903e-ad01dc5cb4ad": {
+      "ProjectGuid": "57b74535-5219-43f8-903e-ad01dc5cb4ad",
+      "DisplayName": "ShopBridge",
+      "ColorIndex": 0
+    },
+    "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3": {
+      "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
+      "DisplayName": "Miscellaneous Files",
+      "ColorIndex": -1
+    },
+    "4cf34f32-75fc-4e69-81df-0705eec0a684": {
+      "ProjectGuid": "4cf34f32-75fc-4e69-81df-0705eec0a684",
+      "DisplayName": "ShopBridgeTests",
+      "ColorIndex": 1
+    }
+  },
+  "NextColorIndex": 2
+}

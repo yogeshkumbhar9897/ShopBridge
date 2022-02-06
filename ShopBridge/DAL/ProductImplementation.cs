@@ -66,12 +66,10 @@ namespace ShopBridge.DAL
         }
 
 
-        public void UpdateStockById(int id, int quantity)
-        {
-            var p = GetProductById(id);
-
-             
-        }
+        //public void UpdateStockById(int id, int quantity)
+        //{
+        //    var p = GetProductById(id);            
+        //}
 
         public async Task<bool> UpdateProduct(Product UpdatedProduct)
         {

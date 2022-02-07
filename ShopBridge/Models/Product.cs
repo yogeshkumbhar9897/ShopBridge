@@ -1,7 +1,9 @@
 ﻿using Newtonsoft.Json;
+using System.Diagnostics.CodeAnalysis;
 
 namespace ShopBridge.Models
 {
+    [ExcludeFromCodeCoverage]
     public class Product
     {
         public int Id { get; set; }

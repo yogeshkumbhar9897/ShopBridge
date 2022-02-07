@@ -1,7 +1,9 @@
 ﻿using ShopBridge.Models;
+using System.Diagnostics.CodeAnalysis;
 
 namespace ShopBridge.DAL
 {
+    [ExcludeFromCodeCoverage]
     public class ProductImplementation :IProductImplementation
     { 
         private readonly ProductDbContext Context;
@@ -29,9 +31,15 @@ namespace ShopBridge.DAL
             }
         }
 
-        public IEnumerable<Product> ShowAllProducts()
+        public async Task<IEnumerable<Product>> ShowAllProducts()
         {
-            return Context.Products;
+            var result = new List<Product>();
+            Task ShowProducts = Task.Run(async () =>
+            {
+                 result = Context.Products.ToList();
+            });
+            await Task.WhenAll(ShowProducts);
+            return result;
         }
 
         public async Task<Product> GetProductById(int id)

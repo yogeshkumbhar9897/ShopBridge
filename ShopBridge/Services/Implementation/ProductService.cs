@@ -12,33 +12,6 @@ namespace ShopBridge.Services.Implementation
             _productImplementation = productImplementation;
         }
 
-        public async Task<Response> DeleteProduct(int id)
-        {
-            var response = new Response();
-            try
-            {
-                var product = await _productImplementation.GetProductById(id);
-                if (product == null)
-                {
-                    throw new Exception(String.Format("Product id {0} is not available ", id));
-                }
-                else
-                {
-                    response.IsSuccess =await _productImplementation.DeleteProduct(product);
-                    response.Data = "Product Deleted Successfully !!";
-                }
-            }
-            catch (Exception ex)
-            {
-
-                response.Data = null;
-                response.ErrorMessage = ex.Message;
-                response.IsSuccess = true;
-            }
-            return response;
-
-        }
-
         public async Task<Response> GetProduct(int id)
         {
             var response = new Response();
@@ -60,20 +33,47 @@ namespace ShopBridge.Services.Implementation
             return response;
         }
 
-        public async Task<bool> InsertProduct(Product product)
+        public async Task<Response> GetAllProduct()
         {
+            var response = new Response();
+            try
+            {
+                var products = await _productImplementation.ShowAllProducts();
+                if (products == null)
+                    throw new Exception(String.Format("Products are not available"));
+                response.Data = products;
+                response.IsSuccess = true;
+
+            }
+            catch (Exception ex)
+            {
+                response.Data = null;
+                response.ErrorMessage = ex.Message;
+                response.IsSuccess = false;
+            }
+            return response;
+        }
+
+        public async Task<Response> InsertProduct(Product product)
+        {
+            var response = new Response();
             try
             {
                 if (product == null)
                 {
                     throw new ArgumentNullException("Sorry ...Can not add empty Product !!!");
                 }
-                 return await _productImplementation.AddProduct(product);
+                 response.IsSuccess =  await _productImplementation.AddProduct(product);
+                 response.Data = "Product Added Successfully";
             }
             catch(Exception ex)
             {
-                throw ex;
+                response.Data = null;
+                response.ErrorMessage = ex.Message;
+                response.IsSuccess = false;
             }
+            return response;
+
         }
 
         public async Task<Response> UpdateProduct(int id, Product UpdatedProduct)
@@ -95,9 +95,38 @@ namespace ShopBridge.Services.Implementation
             }
             catch (Exception ex)
             {
-                throw ex;
+                response.Data = null;
+                response.ErrorMessage = ex.Message;
+                response.IsSuccess = false;
             }
             return response;
+        }
+
+        public async Task<Response> DeleteProduct(int id)
+        {
+            var response = new Response();
+            try
+            {
+                var product = await _productImplementation.GetProductById(id);
+                if (product == null)
+                {
+                    throw new Exception(String.Format("Product id {0} is not available ", id));
+                }
+                else
+                {
+                    response.IsSuccess = await _productImplementation.DeleteProduct(product);
+                    response.Data = "Product Deleted Successfully !!";
+                }
+            }
+            catch (Exception ex)
+            {
+
+                response.Data = null;
+                response.ErrorMessage = ex.Message;
+                response.IsSuccess = false;
+            }
+            return response;
+
         }
     }
 }

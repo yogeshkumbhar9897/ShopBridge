@@ -23,6 +23,12 @@ namespace ShopBridge.Controllers
             return await _productService.GetProduct(id);
         }
 
+        [HttpGet]
+        public async Task<Response> GetProducts()
+        {
+            return await _productService.GetAllProduct();
+        }
+
         // GET: ProductController/Create
         [HttpPost("Product")]
         public async Task<Response> InsertNewProduct(Product product)
@@ -30,7 +36,7 @@ namespace ShopBridge.Controllers
             var response = new Response();
             try
             {
-                response.IsSuccess = await _productService.InsertProduct(product);
+                response =  await _productService.InsertProduct(product);
             }
             catch (Exception ex)
             {

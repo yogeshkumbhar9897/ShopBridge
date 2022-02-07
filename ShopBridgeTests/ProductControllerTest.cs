@@ -39,6 +39,21 @@ namespace ShopBridgeTests
         }
 
         [Test]
+        public async Task GetAllProducts_Success()
+        {
+            //Arrange
+            _productService.Setup(x => x.GetAllProduct()).ReturnsAsync(new Response() { IsSuccess = true });
+
+
+            //Act
+            var result = await productController.GetProducts();
+
+            //Assert
+            Assert.IsNotNull(result);
+            Assert.IsTrue(result.IsSuccess);
+        }
+
+        [Test]
         public async Task IsProductDeletedSuccessfully()
         {
             //Arrange
@@ -56,7 +71,7 @@ namespace ShopBridgeTests
         public async Task IsProductInsertedSuccessfully()
         {
             //Arrange
-            _productService.Setup(x => x.InsertProduct(It.IsAny<Product>())).ReturnsAsync(true);
+            _productService.Setup(x => x.InsertProduct(It.IsAny<Product>())).ReturnsAsync(new Response() { IsSuccess = true });
             //Act
             var result =await productController.InsertNewProduct(new Product());
 

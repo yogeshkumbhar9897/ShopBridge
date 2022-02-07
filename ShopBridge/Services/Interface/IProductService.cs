@@ -6,7 +6,9 @@ namespace ShopBridge.Services.Interface
     {
         public Task<Response> GetProduct(int id);
 
-        public Task<bool> InsertProduct(Product product);
+        public Task<Response> GetAllProduct();
+
+        public Task<Response> InsertProduct(Product product);
 
         public Task<Response> UpdateProduct(int id, Product UpdatedProduct);
         

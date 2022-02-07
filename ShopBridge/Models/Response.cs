@@ -1,5 +1,8 @@
-﻿namespace ShopBridge.Models
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace ShopBridge.Models
 {
+    [ExcludeFromCodeCoverage]
     public class Response
     {
         public Response()
